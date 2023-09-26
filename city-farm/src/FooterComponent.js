@@ -1,4 +1,4 @@
 const FooterComponent = () => {
-  return <div className="footer"> © 2023 Copyright: Elena Barker</div>;
+  return <footer className="footer"> © 2023 Copyright: Elena Barker </footer>;
 };
 export default FooterComponent;

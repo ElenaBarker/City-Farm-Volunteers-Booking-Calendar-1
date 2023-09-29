@@ -14,7 +14,7 @@ const db = new Pool({
 });
 
 app.get("/", function (request, response) {
-  response.send("Dream big :)))");
+  response.send("Every day is a day to shine. Shine on :)");
 });
 
 app.get("/slots", async (req, res) => {

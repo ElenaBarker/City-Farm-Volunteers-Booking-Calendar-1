@@ -3,7 +3,6 @@ import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import FormDialog from "./FormDialogComponent";
-import slotsData from "./OpenSlots.json";
 
 const localizer = momentLocalizer(moment);
 
@@ -13,13 +12,26 @@ const CalendarComponent = () => {
   const [slots, setSlots] = useState([]);
 
   useEffect(() => {
-    setSlots(slotsData);
+    fetchAllSlots();
   }, []);
+
+  const fetchAllSlots = async () => {
+    try {
+      const response = await fetch(
+        "https://pathway-city-farm-project-backend.onrender.com/slots"
+      );
+      if (!response.ok) {
+        throw Error(`Failed to fetch. Error: ${response.status}`);
+      }
+      const data = await response.json();
+      setSlots(data);
+    } catch (error) {}
+  };
 
   const events = slots.map((slot) => ({
     title: slot.title,
-    start: new Date(slot.start),
-    end: new Date(slot.end),
+    start: new Date(slot.startdate),
+    end: new Date(slot.enddate),
   }));
 
   const handleEventSelect = (event) => {

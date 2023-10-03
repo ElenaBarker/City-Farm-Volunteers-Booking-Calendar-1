@@ -8,7 +8,8 @@ function App() {
     <div
       className="App"
       style={{
-        backgroundImage: `url(https://cdn.pixabay.com/photo/2013/08/28/00/54/field-176602_640.jpg)`,
+        backgroundImage: `url(https://images.pexels.com/photos/36347/cow-pasture-animal-almabtrieb.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)`,
+      
       }}
     >
       <HeaderComponent />

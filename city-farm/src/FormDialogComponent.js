@@ -24,10 +24,7 @@ export default function FormDialog({ session, onBook }) {
       alert("Please provide your name.");
       return;
     }
-
     onBook(name);
-
-    
     setOpen(false);
   };
 

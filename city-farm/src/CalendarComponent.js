@@ -54,7 +54,8 @@ const CalendarComponent = () => {
     end: new Date(slot.enddate),
     status: statusForSession(slot.title, slot.startdate),
   }));
-
+  console.log("Slots", slots);
+  console.log("Events", events);
   const handleEventSelect = (event) => {
     setSelectedSession(event);
   };

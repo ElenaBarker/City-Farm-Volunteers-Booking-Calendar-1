@@ -13,13 +13,19 @@ const VolunteerInstructionsComponent = () => {
         perfect for early birds looking to assist with feeding our animals.
       </p>
       <p className="sessions-steps">
-        To book a morning session, follow these steps:
+        To book a <span className="available-session">morning</span> session,
+        follow these steps:
         <ol>
-          <li>Click on an available morning session on the calendar.</li>
+          <li>
+            Click on an available{" "}
+            <span className="available-session">morning</span> session on the
+            calendar.
+          </li>
           <li>Enter your name and click the "Book this session" button.</li>
           <li>
             You'll receive a confirmation, and the session will be marked as
-            booked.
+            booked by changing color to{" "}
+            <span className="booked-session">morning</span>.
           </li>
         </ol>
       </p>
@@ -31,13 +37,13 @@ const VolunteerInstructionsComponent = () => {
         the late afternoon or evening.
       </p>
       <p className="sessions-steps">
-        To book an evening session, follow the same steps as for morning
-        sessions.
+        To book an <span className="available-session">evening</span> session,
+        follow the same steps as for morning sessions.
       </p>
 
       <p className="notes">
         Please note that to ensure fairness and availability for everyone, we
-        only allow one volunteer per session (morning or evening).
+        only allow one volunteer per session (either morning or evening).
       </p>
     </div>
   );

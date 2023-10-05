@@ -2,6 +2,7 @@ import "./App.css";
 import CalendarComponent from "./CalendarComponent";
 import FooterComponent from "./FooterComponent";
 import HeaderComponent from "./HeaderComponent";
+import VolunteerInstructionsComponent from "./VolunteerInstructionsComponent";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       }}
     >
       <HeaderComponent />
+      <VolunteerInstructionsComponent />
       <CalendarComponent />
       <FooterComponent />
     </div>

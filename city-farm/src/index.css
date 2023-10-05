@@ -26,7 +26,44 @@ header {
 
 }
 
+.volunteer-instructions {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #a9becb;
+  text-align: justify;
+}
 
+
+.instructions-header {
+  font-size: 24px;
+}
+
+.instructions-text {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.sessions-header {
+  font-size: 20px;
+}
+
+.sessions-description {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.sessions-steps {
+  font-size: 14px;
+}
+
+.notes {
+  font-size: 16px;
+  color: #813126;
+  font-weight: bold;
+  margin-top: 15px;
+}
 .calendar-container {
   margin: 20px;
   padding: 20px;

@@ -26,6 +26,7 @@ const CalendarComponent = () => {
         throw Error(`Failed to fetch. Error: ${response.status}`);
       }
       const data = await response.json();
+      
       const dataWithTimeZone = data.map((slot) => ({
         ...slot,
         startdate: moment(slot.startdate).tz("Europe/London").toDate(),

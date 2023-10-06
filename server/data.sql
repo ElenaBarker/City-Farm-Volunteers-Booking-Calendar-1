@@ -1,8 +1,8 @@
 CREATE TABLE Slots (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    startdate DATE,
-    enddate DATE
+    startdate TIMESTAMP,
+    enddate TIMESTAMP
 );
 
 INSERT INTO Slots (title, startdate, enddate)

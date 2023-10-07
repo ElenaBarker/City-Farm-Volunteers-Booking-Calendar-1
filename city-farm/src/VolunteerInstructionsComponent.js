@@ -9,7 +9,7 @@ const VolunteerInstructionsComponent = () => {
 
       <h4 className="sessions-header">Morning Sessions</h4>
       <p className="sessions-description">
-        Our morning sessions start at 09:00 and end at 11:00. These sessions are
+        Our morning sessions start at 10:00 and end at 12:00. These sessions are
         perfect for early birds looking to assist with feeding our animals.
       </p>
       <p className="sessions-steps">
@@ -32,7 +32,7 @@ const VolunteerInstructionsComponent = () => {
 
       <h4 className="sessions-header">Evening Sessions</h4>
       <p className="sessions-description">
-        Our evening sessions start at 17:00 and end at 19:00. These sessions are
+        Our evening sessions start at 18:00 and end at 20:00. These sessions are
         ideal for those who prefer assisting with feeding our farm animals in
         the late afternoon or evening.
       </p>

@@ -32,8 +32,8 @@ const CalendarComponent = () => {
         startdate: moment(slot.startdate).tz("Europe/London").toDate(),
         enddate: moment(slot.enddate).tz("Europe/London").toDate(),
       }));
-      console.log("Original Data:", data);
-      console.log("Adjusted Data:", dataWithTimeZone);
+      // console.log("Original Data:", data);
+      // console.log("Adjusted Data:", dataWithTimeZone);
       setSlots(dataWithTimeZone);
     } catch (error) {}
   };
@@ -55,8 +55,8 @@ const CalendarComponent = () => {
     end: new Date(slot.enddate),
     status: statusForSession(slot.title, slot.startdate),
   }));
-  console.log("Slots", slots);
-  console.log("Events", events);
+  // console.log("Slots", slots);
+  // console.log("Events", events);
   const handleEventSelect = (event) => {
     setSelectedSession(event);
   };
@@ -152,7 +152,7 @@ const CalendarComponent = () => {
         <ul>
           {bookedSessions.map((session, index) => (
             <li key={index}>
-              <strong>{session.title}</strong> - {session.date} - {session.name}
+              <strong>{session.title}</strong> - {session.date} - {session.name} <button>Cancel Booking</button>
             </li>
           ))}
         </ul>

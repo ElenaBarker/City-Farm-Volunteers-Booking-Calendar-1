@@ -21,8 +21,19 @@ app.get("/slots", async (req, res) => {
   try {
     const query = `SELECT * FROM Slots`;
     const result = await db.query(query);
-    const videos = result.rows;
-    res.status(200).json(videos);
+    const slots = result.rows;
+    res.status(200).json(slots);
+  } catch (error) {
+    res.status(404).json({ error: "Fetch" });
+  }
+});
+
+app.get("/volunteers", async (req, res) => {
+  try {
+    const query = `SELECT * FROM Volunteers`;
+    const result = await db.query(query);
+    const volunteers = result.rows;
+    res.status(200).json(volunteers);
   } catch (error) {
     res.status(404).json({ error: "Fetch" });
   }

@@ -31,3 +31,26 @@ VALUES
   ('Evening session', '2023-10-11 17:00:00', '2023-10-11 19:00:00'),
   ('Morning session', '2023-10-12 09:00:00', '2023-10-12 11:00:00'),
   ('Evening session', '2023-10-12 17:00:00', '2023-10-12 19:00:00');
+
+  CREATE TABLE Volunteers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone_number VARCHAR(255) NOT NULL
+);
+
+INSERT INTO Volunteers (name, email, phone_number)
+VALUES
+  ('Elena', 'elena@gmail.com', '07391857653'),
+  ('Paulina', 'paulina@gmail.com', '07391857651'),
+  ('Anu', 'anu@gmail.com', '07391857652'),
+  ('Afsha', 'afsha@gmail.com', '07391857654'),
+  ('Shadi', 'shadi@gmail.com', '07391857655'),
+  ('Junita', 'junita@gmail.com', '07391857656'),
+  ('Saliha', 'saliha@gmail.com', '07391857657'),
+  ('Onur', 'onur@gmail.com', '07391857658'),
+  ('Bekir', 'bekir@gmail.com', '07391857659'),
+  ('Saqib', 'saqib@gmail.com', '07391857660');
+
+
+

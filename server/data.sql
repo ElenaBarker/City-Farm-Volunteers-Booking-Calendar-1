@@ -52,5 +52,11 @@ VALUES
   ('Bekir', 'bekir@gmail.com', '07391857659'),
   ('Saqib', 'saqib@gmail.com', '07391857660');
 
+  CREATE TABLE Bookings (
+    id SERIAL PRIMARY KEY,
+    vol_id INTEGER REFERENCES Volunteers(id),
+    slot_id INTEGER REFERENCES Slots(id)
+);
+
 
 

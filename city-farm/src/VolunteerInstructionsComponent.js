@@ -1,6 +1,7 @@
-const VolunteerInstructionsComponent = () => {
+const VolunteerInstructionsComponent = ({ pageToShow }) => {
   return (
     <div className="volunteer-instructions">
+      {pageToShow === "manager" && <h1>You are the manager</h1>}
       <h3 className="instructions-header">How to Book a Volunteer Session</h3>
       <p className="instructions-text">
         Welcome to our city farm! We have both morning and evening sessions

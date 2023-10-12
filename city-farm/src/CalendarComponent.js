@@ -12,6 +12,7 @@ const CalendarComponent = () => {
   const [selectedSession, setSelectedSession] = useState(null);
   const [bookedSessions, setBookedSessions] = useState([]);
   const [slots, setSlots] = useState([]);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     fetchAllSlots();
@@ -26,7 +27,7 @@ const CalendarComponent = () => {
         throw Error(`Failed to fetch. Error: ${response.status}`);
       }
       const data = await response.json();
-      
+
       const dataWithTimeZone = data.map((slot) => ({
         ...slot,
         startdate: moment(slot.startdate).tz("Europe/London").toDate(),
@@ -55,12 +56,14 @@ const CalendarComponent = () => {
   }));
   const handleEventSelect = (event) => {
     setSelectedSession(event);
+    setDialogOpen(true);
   };
 
   const handleSessionBooking = (name) => {
     if (!selectedSession || !selectedSession.start) {
       return;
     }
+    setDialogOpen(false);
 
     const selectedSessionID = `${
       selectedSession.title
@@ -140,6 +143,7 @@ const CalendarComponent = () => {
         <FormDialog
           session={selectedSession}
           onBook={(name) => handleSessionBooking(name)}
+          open={dialogOpen}
         />
       )}
 
@@ -148,7 +152,8 @@ const CalendarComponent = () => {
         <ul>
           {bookedSessions.map((session, index) => (
             <li key={index}>
-              <strong>{session.title}</strong> - {session.date} - {session.name} <button>Cancel Booking</button>
+              <strong>{session.title}</strong> - {session.date} - {session.name}{" "}
+              <button>Cancel Booking</button>
             </li>
           ))}
         </ul>

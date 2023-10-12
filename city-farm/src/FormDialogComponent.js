@@ -8,12 +8,12 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 export default function FormDialog({ session, onBook }) {
-  const [open, setOpen] = useState(false);
-  const [name, setName] = useState(""); 
+  const [open, setOpen] = useState(session);
+  const [name, setName] = useState("");
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
 
   const handleClose = () => {
     setOpen(false);
@@ -30,9 +30,9 @@ export default function FormDialog({ session, onBook }) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      {/* <Button variant="outlined" onClick={handleClickOpen}>
         Book this session
-      </Button>
+      </Button> */}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Book the session</DialogTitle>
         <DialogContent>

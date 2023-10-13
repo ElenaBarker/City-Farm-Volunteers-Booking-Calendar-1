@@ -53,9 +53,11 @@ VALUES
   ('Saqib', 'saqib@gmail.com', '07391857660');
 
   CREATE TABLE Bookings (
-    id SERIAL PRIMARY KEY,
-    vol_id INTEGER REFERENCES Volunteers(id),
-    slot_id INTEGER REFERENCES Slots(id)
+    booking_id SERIAL PRIMARY KEY,
+    session_id INT REFERENCES Slots(id) NOT NULL,
+    volunteer_id INT REFERENCES Volunteers(id) NOT NULL,
+    booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 );
 
 

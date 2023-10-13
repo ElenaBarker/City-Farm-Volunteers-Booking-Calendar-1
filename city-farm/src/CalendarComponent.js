@@ -4,6 +4,7 @@ import moment from "moment";
 import "moment-timezone";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import FormDialog from "./FormDialogComponent";
+import BookedSessionsComponent from "./BookedSessionsComponent";
 moment.tz.setDefault("Europe/London");
 
 const localizer = momentLocalizer(moment);
@@ -149,14 +150,7 @@ const CalendarComponent = () => {
 
       <div className="booked-sessions">
         <h3>Booked Sessions:</h3>
-        <ul>
-          {bookedSessions.map((session, index) => (
-            <li key={index}>
-              <strong>{session.title}</strong> - {session.date} - {session.name}{" "}
-              <button>Cancel Booking</button>
-            </li>
-          ))}
-        </ul>
+        <BookedSessionsComponent bookedSessions={bookedSessions} />
       </div>
     </div>
   );

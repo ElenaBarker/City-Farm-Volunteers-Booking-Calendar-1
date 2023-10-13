@@ -85,26 +85,29 @@ code {
   margin-right: 10px;
 }
 
+.booked-sessions-item {
+  margin-bottom: 10px;
+}
+
+.cancel-booking-button {
+  background-color: #813126;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .available-session {
   background-color: #cea86f;
   color: white;
   
 }
 
-
 .booked-session {
   background-color: #813126;
   color: white;
-  
-}
-
-button {
-  background-color: #007bff;
-  color: #ffffff;
-  border: 2px solid #007bff;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
 }
 
 .header-container {

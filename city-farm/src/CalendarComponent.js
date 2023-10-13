@@ -17,6 +17,7 @@ const CalendarComponent = () => {
 
   useEffect(() => {
     fetchAllSlots();
+    fetchAllBookings();
   }, []);
 
   const fetchAllSlots = async () => {
@@ -37,7 +38,19 @@ const CalendarComponent = () => {
       setSlots(dataWithTimeZone);
     } catch (error) {}
   };
+  const fetchAllBookings = async () => {
+    try {
+      const response = await fetch(
+        "https://pathway-city-farm-project-backend.onrender.com/bookings"
+      );
+      if (!response.ok) {
+        throw Error(`Failed to fetch. Error: ${response.status}`);
+      }
+      const data = await response.json();
 
+     setBookedSessions(data);
+    } catch (error) {}
+  };
   const statusForSession = (title, startdate) => {
     const isBooked = bookedSessions.some((session) => {
       return (

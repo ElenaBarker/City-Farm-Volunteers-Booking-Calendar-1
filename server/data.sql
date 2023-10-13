@@ -58,7 +58,7 @@ VALUES
     volunteer_id INT REFERENCES Volunteers(id) NOT NULL,
     booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-);
+
 
 
 

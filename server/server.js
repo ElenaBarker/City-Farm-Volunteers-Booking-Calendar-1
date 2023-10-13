@@ -39,6 +39,24 @@ app.get("/volunteers", async (req, res) => {
   }
 });
 
+app.post("/bookings", async (req, res) => {
+  try {
+    const { session_id, volunteer_id } = req.body;
+    const query = `
+      INSERT INTO Bookings (session_id, volunteer_id)
+      VALUES ($1, $2)
+      RETURNING *;
+    `;
+    const values = [session_id, volunteer_id];
+    const result = await db.query(query, values);
+    const booking = result.rows[0];
+    res.status(201).json(booking);
+  } catch (error) {
+    res.status(400).json({ error: "Booking failed" });
+  }
+});
+
+
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}. Ready to accept requests!`);
 });

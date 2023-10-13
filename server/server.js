@@ -4,6 +4,9 @@ const port = process.env.PORT || 5000;
 const cors = require("cors");
 app.use(cors());
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+
 const dotenv = require("dotenv");
 dotenv.config();
 const { Pool } = require("pg");
@@ -39,6 +42,26 @@ app.get("/volunteers", async (req, res) => {
   }
 });
 
+app.get("/bookings", async (req, res) => {
+  try {
+    const query = `SELECT
+      B.booking_id,
+      S.title AS title,
+      S.startdate AS startdate,
+      S.enddate AS enddate,
+      V.name AS name,
+      B.booking_date
+    FROM Bookings AS B
+    INNER JOIN Slots AS S ON B.session_id = S.id
+    INNER JOIN Volunteers AS V ON B.volunteer_id = V.id;`;
+    const result = await db.query(query);
+    const bookings = result.rows;
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(404).json({ error: "Fetch" });
+  }
+});
+
 app.post("/bookings", async (req, res) => {
   try {
     const { session_id, volunteer_id } = req.body;
@@ -55,7 +78,6 @@ app.post("/bookings", async (req, res) => {
     res.status(400).json({ error: "Booking failed" });
   }
 });
-
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}. Ready to accept requests!`);

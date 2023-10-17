@@ -14,10 +14,12 @@ const CalendarComponent = () => {
   const [bookedSessions, setBookedSessions] = useState([]);
   const [slots, setSlots] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [volunteers, setVolunteers] = useState([]);
 
   useEffect(() => {
     fetchAllSlots();
     fetchAllBookings();
+    fetchAllVolunteers();
   }, []);
 
   const fetchAllSlots = async () => {
@@ -48,21 +50,40 @@ const CalendarComponent = () => {
       }
       const data = await response.json();
 
-     setBookedSessions(data);
+      setBookedSessions(data);
     } catch (error) {}
   };
+
+  const fetchAllVolunteers = async () => {
+    try {
+      const response = await fetch(
+        "https://pathway-city-farm-project-backend.onrender.com/volunteers"
+      );
+      if (!response.ok) {
+        throw Error(`Failed to fetch volunteers. Error: ${response.status}`);
+      }
+      const data = await response.json();
+      const volunteerOptions = data.map((volunteer) => ({
+        name: volunteer.name,
+        id: volunteer.id,
+      }));
+      setVolunteers(volunteerOptions);
+    } catch (error) {
+      console.error("Error fetching volunteers", error);
+    }
+  };
+
   const statusForSession = (title, startdate) => {
     const isBooked = bookedSessions.some((session) => {
       return (
         session.title === title &&
-        new Date(session.start).toDateString() ===
-          new Date(startdate).toDateString()
+        new Date(session.startdate) === new Date(startdate)
       );
     });
     return isBooked ? "booked" : "available";
   };
-
   const events = slots.map((slot) => ({
+    id: slot.id,
     title: slot.title,
     start: new Date(slot.startdate),
     end: new Date(slot.enddate),
@@ -73,7 +94,7 @@ const CalendarComponent = () => {
     setDialogOpen(true);
   };
 
-  const handleSessionBooking = (name) => {
+  const handleSessionBooking = (name, selectedVolunteer) => {
     if (!selectedSession || !selectedSession.start) {
       return;
     }
@@ -84,9 +105,7 @@ const CalendarComponent = () => {
     }-${selectedSession.start.toDateString()}`;
 
     const isAlreadyBooked = bookedSessions.some((session) => {
-      const uniqueSessionKey = `${
-        session.title
-      }-${session.start.toDateString()}`;
+      const uniqueSessionKey = `${session.title}-${session.startdate}`;
       return uniqueSessionKey === selectedSessionID;
     });
 
@@ -107,6 +126,7 @@ const CalendarComponent = () => {
       name: name,
       status: "booked",
       date: selectedSession.start.toDateString(),
+      volunteer: selectedVolunteer,
     };
 
     setBookedSessions([...bookedSessions, bookedSession]);
@@ -123,6 +143,9 @@ const CalendarComponent = () => {
     setSelectedSession(null);
   };
 
+
+
+
   return (
     <div className="calendar-container">
       <h2 className="calendar-header">Volunteer Booking Calendar</h2>
@@ -133,6 +156,7 @@ const CalendarComponent = () => {
         style={{ height: 400 }}
         events={events}
         eventPropGetter={(event) => {
+          
           if (event.status === "booked") {
             return {
               style: {
@@ -156,8 +180,10 @@ const CalendarComponent = () => {
       {selectedSession && (
         <FormDialog
           session={selectedSession}
-          onBook={(name) => handleSessionBooking(name)}
+          onBook={(name, volunteer) => handleSessionBooking(name, volunteer)}
           open={dialogOpen}
+          volunteers={volunteers}
+          
         />
       )}
 

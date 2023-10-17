@@ -5,9 +5,7 @@ import FooterComponent from "./FooterComponent";
 import HeaderComponent from "./HeaderComponent";
 import VolunteerInstructionsComponent from "./VolunteerInstructionsComponent";
 
-
 function App() {
-  // allowed values "volunteer" or "manager"
   const [pageToShow, setPageToShow] = useState("volunteer");
   return (
     <div className="App">

@@ -7,7 +7,8 @@ const BookedSessionsComponent = ({ bookedSessions }) => {
       <ul>
         {bookedSessions.map((session, index) => (
           <li key={index} className="booked-sessions-item">
-            <strong>{session.title}</strong> - {session.date} - {session.name}{" "}
+            <strong>{session.title}</strong> - {session.startdate} -{" "}
+            {session.name}{" "}
             <button className="cancel-booking-button">Cancel booking</button>
           </li>
         ))}

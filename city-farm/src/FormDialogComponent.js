@@ -1,58 +1,62 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Select } from "@mui/material";
+import { MenuItem } from "@mui/material";
 
-export default function FormDialog({ session, onBook }) {
+export default function FormDialog({ session, volunteers }) {
   const [open, setOpen] = useState(session);
-  const [name, setName] = useState("");
+  const [selectedVolunteer, setSelectedVolunteer] = useState(null);
 
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
+  const handleAddBooking = async (selectedSession) => {
+    try {
+      const response = await fetch("http://localhost:5000/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          session_id: session.id,
+          volunteer_id: selectedVolunteer,
+        }),
+      });
+      if (!response.ok) {
+        throw Error(`Failed to add video. Error: ${response.status}`);
+      }
+
+      setOpen(false);
+    } catch (error) {}
+  };
 
   const handleClose = () => {
     setOpen(false);
   };
-
-  const handleBook = () => {
-    if (name.trim() === "") {
-      alert("Please provide your name.");
-      return;
-    }
-    onBook(name);
-    setOpen(false);
+  const handleChange = (event) => {
+    setSelectedVolunteer(event.target.value);
   };
 
   return (
     <div>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        Book this session
-      </Button> */}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Book the session</DialogTitle>
         <DialogContent>
           <DialogContentText>
             To book the session, please provide your name.
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Name"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <Select onChange={handleChange}>
+            {volunteers.map((volunteer, index) => (
+              <MenuItem key={index} value={volunteer.id}>
+                {volunteer.name}
+              </MenuItem>
+            ))}
+          </Select>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleBook}>Book</Button>
+          <Button onClick={handleAddBooking}>Book</Button>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>

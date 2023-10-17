@@ -14,16 +14,19 @@ export default function FormDialog({ session, volunteers }) {
 
   const handleAddBooking = async (selectedSession) => {
     try {
-      const response = await fetch("http://localhost:5000/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          session_id: session.id,
-          volunteer_id: selectedVolunteer,
-        }),
-      });
+      const response = await fetch(
+        "https://pathway-city-farm-project-backend.onrender.com/bookings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            session_id: session.id,
+            volunteer_id: selectedVolunteer,
+          }),
+        }
+      );
       if (!response.ok) {
         throw Error(`Failed to add video. Error: ${response.status}`);
       }

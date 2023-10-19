@@ -56,7 +56,8 @@ VALUES
     booking_id SERIAL PRIMARY KEY,
     session_id INT REFERENCES Slots(id) NOT NULL,
     volunteer_id INT REFERENCES Volunteers(id) NOT NULL,
-    booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
 );
 
 

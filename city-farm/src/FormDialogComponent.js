@@ -30,9 +30,8 @@ export default function FormDialog({ session, volunteers }) {
       if (!response.ok) {
         throw Error(`Failed to add video. Error: ${response.status}`);
       }
-
-      setOpen(false);
     } catch (error) {}
+    setOpen(false);
   };
 
   const handleClose = () => {

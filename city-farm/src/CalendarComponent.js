@@ -32,13 +32,15 @@ const CalendarComponent = () => {
       }
       const data = await response.json();
 
-      const dataWithTimeZone = data.map((slot) => ({
-        ...slot,
-        startdate: moment(slot.startdate).tz("Europe/London").toDate(),
-        enddate: moment(slot.enddate).tz("Europe/London").toDate(),
-      }));
-      setSlots(dataWithTimeZone);
-    } catch (error) {}
+      // const dataWithTimeZone = data.map((slot) => ({
+      //   ...slot,
+      //   startdate: moment(slot.startdate).tz("Europe/London").toDate(),
+      //   enddate: moment(slot.enddate).tz("Europe/London").toDate(),
+      // }));
+      setSlots(data);
+    } catch (error) {
+      console.error("Error fetching slots", error);
+    }
   };
   const fetchAllBookings = async () => {
     try {
@@ -51,7 +53,9 @@ const CalendarComponent = () => {
       const data = await response.json();
 
       setBookedSessions(data);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error fetching booked sessions", error);
+    }
   };
 
   const fetchAllVolunteers = async () => {
@@ -73,22 +77,24 @@ const CalendarComponent = () => {
     }
   };
 
-  const statusForSession = (title, startdate) => {
-    const isBooked = bookedSessions.some((session) => {
-      return (
-        session.title === title &&
-        new Date(session.startdate) === new Date(startdate)
-      );
-    });
-    return isBooked ? "booked" : "available";
-  };
+  // const statusForSession = (title, startdate) => {
+  //   const isBooked = bookedSessions.some((session) => {
+  //     return (
+  //       session.title === title &&
+  //       new Date(session.startdate) === new Date(startdate)
+  //     );
+  //   });
+  //   return isBooked ? "booked" : "available";
+  // };
+
   const events = slots.map((slot) => ({
     id: slot.id,
     title: slot.title,
-    start: new Date(slot.startdate),
-    end: new Date(slot.enddate),
-    status: statusForSession(slot.title, slot.startdate),
+    start: slot.startdate,
+    end: slot.enddate,
+    status: slot.status,
   }));
+
   const handleEventSelect = (event) => {
     setSelectedSession(event);
     setDialogOpen(true);
@@ -100,14 +106,17 @@ const CalendarComponent = () => {
     }
     setDialogOpen(false);
 
+
     const selectedSessionID = `${
       selectedSession.title
     }-${selectedSession.start.toDateString()}`;
+
 
     const isAlreadyBooked = bookedSessions.some((session) => {
       const uniqueSessionKey = `${session.title}-${session.startdate}`;
       return uniqueSessionKey === selectedSessionID;
     });
+
 
     if (isAlreadyBooked) {
       alert("This session is already booked.");
@@ -119,15 +128,17 @@ const CalendarComponent = () => {
         slot.title !== selectedSession.title ||
         slot.startdate !== selectedSession.start.toDateString()
     );
+
     const bookedSession = {
       title: selectedSession.title,
       start: selectedSession.start,
       end: selectedSession.end,
       name: name,
-      status: "booked",
+      status: selectedSession.status,
       date: selectedSession.start.toDateString(),
       volunteer: selectedVolunteer,
     };
+
 
     setBookedSessions([...bookedSessions, bookedSession]);
     setSlots(updatedSlots);
@@ -143,9 +154,6 @@ const CalendarComponent = () => {
     setSelectedSession(null);
   };
 
-
-
-
   return (
     <div className="calendar-container">
       <h2 className="calendar-header">Volunteer Booking Calendar</h2>
@@ -156,7 +164,6 @@ const CalendarComponent = () => {
         style={{ height: 400 }}
         events={events}
         eventPropGetter={(event) => {
-          
           if (event.status === "booked") {
             return {
               style: {
@@ -183,7 +190,6 @@ const CalendarComponent = () => {
           onBook={(name, volunteer) => handleSessionBooking(name, volunteer)}
           open={dialogOpen}
           volunteers={volunteers}
-          
         />
       )}
 

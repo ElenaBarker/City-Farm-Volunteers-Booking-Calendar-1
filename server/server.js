@@ -49,6 +49,7 @@ app.get("/bookings", async (req, res) => {
       S.title AS title,
       S.startdate AS startdate,
       S.enddate AS enddate,
+      S.status AS status,
       V.name AS name,
       B.booking_date
     FROM Bookings AS B
@@ -72,8 +73,16 @@ app.post("/bookings", async (req, res) => {
     `;
     const values = [session_id, volunteer_id];
     const result = await db.query(query, values);
-    const booking = result.rows[0];
-    res.status(201).json(booking);
+    // const booking = result.rows[0];
+    const updateQuery = `
+      UPDATE Slots
+      SET status = 'booked'
+      WHERE id = $1;
+    `;
+    const updateValues = [session_id];
+    await db.query(updateQuery, updateValues);
+
+    res.status(201).json(result.rows[0]);
   } catch (error) {
     res.status(400).json({ error: "Booking failed" });
   }

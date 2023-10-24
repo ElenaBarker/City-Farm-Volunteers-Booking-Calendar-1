@@ -66,6 +66,18 @@ app.get("/bookings", async (req, res) => {
 app.post("/bookings", async (req, res) => {
   try {
     const { session_id, volunteer_id } = req.body;
+    const queryToCheckAvailability = `
+    SELECT status
+    FROM Slots
+    WHERE id = $1;
+    `;
+    const availabilityResult = await db.query(queryToCheckAvailability, [
+      session_id,
+    ]);
+    if (availabilityResult.rows[0].status === "booked") {
+      res.status(409).json({ error: "This session is already booked." });
+      return;
+    }
     const query = `
       INSERT INTO Bookings (session_id, volunteer_id)
       VALUES ($1, $2)

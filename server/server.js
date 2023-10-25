@@ -16,8 +16,8 @@ const db = new Pool({
   ssl: { rejectUnauthorized: false },
 });
 
-app.get("/", function (request, response) {
-  response.send("Every day is a day to shine. Shine on :)");
+app.get("/", function (req, res) {
+  res.send("Every day is a day to shine. Shine on :)");
 });
 
 app.get("/sessions", async (req, res) => {
@@ -98,6 +98,40 @@ app.post("/bookings", async (req, res) => {
     res.status(400).json({ error: "Booking failed" });
   }
 });
+
+app.delete("/bookings/:bookingId", async (req, res) => {
+  const bookingId = req.params.bookingId;
+  try {
+    const queryToGetSessionInfo = `
+      SELECT session_id
+      FROM Bookings
+      WHERE booking_id = $1;
+    `;
+    const sessionInfoResult = await db.query(queryToGetSessionInfo, [
+      bookingId,
+    ]);
+
+    const session_id = sessionInfoResult.rows[0].session_id;
+
+    const deleteBookingQuery = `
+      DELETE FROM Bookings
+      WHERE booking_id = $1;
+    `;
+    await db.query(deleteBookingQuery, [bookingId]);
+
+    const updateSessionQuery = `
+      UPDATE Sessions
+      SET status = 'available'
+      WHERE id = $1;
+    `;
+    await db.query(updateSessionQuery, [session_id]);
+
+    res.status(204).send();
+  } catch (error) {
+    res.status(400).json({ error: "Cancellation failed" });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}. Ready to accept requests!`);

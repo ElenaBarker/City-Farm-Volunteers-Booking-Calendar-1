@@ -20,12 +20,12 @@ app.get("/", function (request, response) {
   response.send("Every day is a day to shine. Shine on :)");
 });
 
-app.get("/slots", async (req, res) => {
+app.get("/sessions", async (req, res) => {
   try {
-    const query = `SELECT * FROM Slots`;
+    const query = `SELECT * FROM Sessions`;
     const result = await db.query(query);
-    const slots = result.rows;
-    res.status(200).json(slots);
+    const sessions = result.rows;
+    res.status(200).json(sessions);
   } catch (error) {
     res.status(400).json({ error: "Fetch" });
   }
@@ -53,7 +53,7 @@ app.get("/bookings", async (req, res) => {
       V.name AS name,
       B.booking_date
     FROM Bookings AS B
-    INNER JOIN Slots AS S ON B.session_id = S.id
+    INNER JOIN Sessions AS S ON B.session_id = S.id
     INNER JOIN Volunteers AS V ON B.volunteer_id = V.id;`;
     const result = await db.query(query);
     const bookings = result.rows;
@@ -68,7 +68,7 @@ app.post("/bookings", async (req, res) => {
     const { session_id, volunteer_id } = req.body;
     const queryToCheckAvailability = `
     SELECT status
-    FROM Slots
+    FROM Sessions
     WHERE id = $1;
     `;
     const availabilityResult = await db.query(queryToCheckAvailability, [
@@ -85,9 +85,8 @@ app.post("/bookings", async (req, res) => {
     `;
     const values = [session_id, volunteer_id];
     const result = await db.query(query, values);
-    // const booking = result.rows[0];
     const updateQuery = `
-      UPDATE Slots
+      UPDATE Sessions
       SET status = 'booked'
       WHERE id = $1;
     `;

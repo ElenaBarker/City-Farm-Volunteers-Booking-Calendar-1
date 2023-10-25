@@ -1,4 +1,4 @@
-CREATE TABLE Slots (
+CREATE TABLE Sessions (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     startdate TIMESTAMP,
@@ -6,7 +6,7 @@ CREATE TABLE Slots (
     status VARCHAR(255)
 );
 
-INSERT INTO Slots (title, startdate, enddate, status)
+INSERT INTO Sessions (title, startdate, enddate, status)
 VALUES
   ('Morning session', '2023-09-27 09:00:00', '2023-09-27 11:00:00', 'available'),
   ('Evening session', '2023-09-27 17:00:00', '2023-09-27 19:00:00', 'available'),
@@ -31,7 +31,28 @@ VALUES
   ('Morning session', '2023-10-11 09:00:00', '2023-10-11 11:00:00', 'available'),
   ('Evening session', '2023-10-11 17:00:00', '2023-10-11 19:00:00', 'available'),
   ('Morning session', '2023-10-12 09:00:00', '2023-10-12 11:00:00', 'available'),
-  ('Evening session', '2023-10-12 17:00:00', '2023-10-12 19:00:00', 'available');
+  ('Evening session', '2023-10-12 17:00:00', '2023-10-12 19:00:00', 'available'),
+  ('Morning session', '2023-10-13 09:00:00', '2023-10-13 11:00:00', 'available'),
+  ('Evening session', '2023-10-13 17:00:00', '2023-10-13 19:00:00', 'available'),
+  ('Morning session', '2023-10-14 09:00:00', '2023-10-14 11:00:00', 'available'),
+  ('Evening session', '2023-10-14 17:00:00', '2023-10-14 19:00:00', 'available'),
+  ('Morning session', '2023-10-15 09:00:00', '2023-10-15 11:00:00', 'available'),
+  ('Evening session', '2023-10-15 17:00:00', '2023-10-15 19:00:00', 'available'),
+  ('Morning session', '2023-10-16 09:00:00', '2023-10-16 11:00:00', 'available'),
+  ('Evening session', '2023-10-16 17:00:00', '2023-10-16 19:00:00', 'available'),
+  ('Morning session', '2023-10-17 09:00:00', '2023-10-17 11:00:00', 'available'),
+  ('Evening session', '2023-10-17 17:00:00', '2023-10-17 19:00:00', 'available'),
+  ('Morning session', '2023-10-18 09:00:00', '2023-10-18 11:00:00', 'available'),
+  ('Evening session', '2023-10-18 17:00:00', '2023-10-18 19:00:00', 'available'),
+  ('Morning session', '2023-10-25 09:00:00', '2023-10-25 11:00:00', 'available'),
+  ('Evening session', '2023-10-25 17:00:00', '2023-10-25 19:00:00', 'available'),
+  ('Morning session', '2023-10-26 09:00:00', '2023-10-26 11:00:00', 'available'),
+  ('Evening session', '2023-10-26 17:00:00', '2023-10-26 19:00:00', 'available'),
+  ('Morning session', '2023-10-27 09:00:00', '2023-10-27 11:00:00', 'available'),
+  ('Evening session', '2023-10-27 17:00:00', '2023-10-27 19:00:00', 'available'),
+  ('Morning session', '2023-10-28 09:00:00', '2023-10-28 11:00:00', 'available'),
+  ('Evening session', '2023-10-28 17:00:00', '2023-10-28 19:00:00', 'available');
+
 
   CREATE TABLE Volunteers (
     id SERIAL PRIMARY KEY,
@@ -55,7 +76,7 @@ VALUES
 
   CREATE TABLE Bookings (
     booking_id SERIAL PRIMARY KEY,
-    session_id INT REFERENCES Slots(id) NOT NULL,
+    session_id INT REFERENCES Sessions(id) NOT NULL,
     volunteer_id INT REFERENCES Volunteers(id) NOT NULL,
     booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP  
 );

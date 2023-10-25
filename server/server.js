@@ -27,7 +27,7 @@ app.get("/slots", async (req, res) => {
     const slots = result.rows;
     res.status(200).json(slots);
   } catch (error) {
-    res.status(404).json({ error: "Fetch" });
+    res.status(400).json({ error: "Fetch" });
   }
 });
 
@@ -38,7 +38,7 @@ app.get("/volunteers", async (req, res) => {
     const volunteers = result.rows;
     res.status(200).json(volunteers);
   } catch (error) {
-    res.status(404).json({ error: "Fetch" });
+    res.status(400).json({ error: "Fetch" });
   }
 });
 
@@ -59,7 +59,7 @@ app.get("/bookings", async (req, res) => {
     const bookings = result.rows;
     res.status(200).json(bookings);
   } catch (error) {
-    res.status(404).json({ error: "Fetch" });
+    res.status(400).json({ error: "Fetch" });
   }
 });
 

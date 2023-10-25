@@ -130,6 +130,8 @@ const CalendarComponent = () => {
           session={selectedSession}
           onBook={() => handleSessionBooked()}
           volunteers={volunteers}
+          setDialogOpen={setDialogOpen}
+          dialogOpen={dialogOpen}
         />
       )}
 

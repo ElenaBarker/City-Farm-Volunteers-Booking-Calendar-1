@@ -8,8 +8,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Select } from "@mui/material";
 import { MenuItem } from "@mui/material";
 
-export default function FormDialog({ session, volunteers, onBook }) {
-  const [open, setOpen] = useState(session);
+export default function FormDialog({
+  session,
+  volunteers,
+  onBook,
+  setDialogOpen,
+  dialogOpen,
+}) {
   const [selectedVolunteer, setSelectedVolunteer] = useState(null);
 
   const handleAddBooking = async () => {
@@ -35,11 +40,11 @@ export default function FormDialog({ session, volunteers, onBook }) {
         throw Error(`Failed to book session. Error: ${response.status}`);
       }
     } catch (error) {}
-    setOpen(false);
+    setDialogOpen(false);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setDialogOpen(false);
   };
   const handleChange = (event) => {
     setSelectedVolunteer(event.target.value);
@@ -47,7 +52,7 @@ export default function FormDialog({ session, volunteers, onBook }) {
 
   return (
     <div>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={dialogOpen} onClose={handleClose}>
         <DialogTitle>Book the session</DialogTitle>
         <DialogContent>
           <DialogContentText>

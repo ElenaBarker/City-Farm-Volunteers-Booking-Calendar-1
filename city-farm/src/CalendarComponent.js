@@ -5,7 +5,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import FormDialog from "./FormDialogComponent";
 import BookedSessionsComponent from "./BookedSessionsComponent";
 
-
 const localizer = momentLocalizer(moment);
 
 const CalendarComponent = () => {
@@ -24,7 +23,7 @@ const CalendarComponent = () => {
   const fetchAllSessions = async () => {
     try {
       const response = await fetch(
-        "https://pathway-city-farm-project-backend.onrender.com/slots"
+        "https://pathway-city-farm-project-backend.onrender.com/sessions"
       );
       if (!response.ok) {
         throw Error(`Failed to fetch. Error: ${response.status}`);

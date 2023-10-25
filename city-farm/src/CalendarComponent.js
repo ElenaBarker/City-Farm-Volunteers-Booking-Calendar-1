@@ -95,6 +95,24 @@ const CalendarComponent = () => {
     fetchAllBookings();
   }
 
+  const onCancelBooking = async (bookingId) => {
+    try {
+      const response = await fetch(
+        `https://pathway-city-farm-project-backend.onrender.com/bookings/${bookingId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) {
+        throw Error(`Failed to cancel booking. Error: ${response.status}`);
+      }
+      fetchAllBookings();
+      fetchAllSessions();
+    } catch (error) {
+      console.error("Error canceling booking", error);
+    }
+  };
+
   return (
     <div className="calendar-container">
       <h3 className="calendar-header">Volunteer Booking Calendar</h3>
@@ -137,7 +155,10 @@ const CalendarComponent = () => {
 
       <div className="booked-sessions">
         <h3>Booked Sessions:</h3>
-        <BookedSessionsComponent bookedSessions={bookedSessions} />
+        <BookedSessionsComponent
+          bookedSessions={bookedSessions}
+          onCancelBooking={onCancelBooking}
+        />
       </div>
     </div>
   );

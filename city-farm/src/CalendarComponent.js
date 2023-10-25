@@ -97,7 +97,7 @@ const CalendarComponent = () => {
 
   return (
     <div className="calendar-container">
-      <h2 className="calendar-header">Volunteer Booking Calendar</h2>
+      <h3 className="calendar-header">Volunteer Booking Calendar</h3>
       <BigCalendar
         localizer={localizer}
         startAccessor="start"

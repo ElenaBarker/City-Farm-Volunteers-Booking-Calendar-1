@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <HeaderComponent setPageToShow={setPageToShow} />
       <VolunteerInstructionsComponent pageToShow={pageToShow} />
-      {pageToShow === "volunteer" ? <CalendarComponent /> : "Hello manager"}
+      {pageToShow === "volunteer" ? <CalendarComponent /> : <p>Hello manager</p>}
       <FooterComponent />
     </div>
   );

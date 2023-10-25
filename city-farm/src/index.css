@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+  background-color: #cfc7bd;
+
 }
 
 code {
@@ -16,11 +17,13 @@ code {
 
 
 .volunteer-instructions {
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
+  width: 80%;
+  margin: auto;
+  margin-top: 2rem;
+  padding: 2rem;
+  border: 1px solid #ffffff;
   border-radius: 5px;
-  background-color: #DCD7C9;
+  background-color: rgba(245, 245, 245, 0.3);
   text-align: justify;
 }
 
@@ -49,10 +52,11 @@ code {
 
 .notes {
   font-size: 16px;
-  color: #813126;
+  color: #63434c;
   font-weight: bold;
   margin-top: 15px;
 }
+
 .calendar-container {
   margin: 20px;
   padding: 20px;
@@ -69,63 +73,90 @@ code {
 }
 
 .booked-sessions {
-  background-color: #adad9f;
+  background-color: #e3e3e3a4;
+  border: 1px solid white;
+  border-radius: 1rem;
   color: black;
-  padding: 5px 10px;
-  margin-bottom: 5px;
-  border-radius: 5px;
   display: flex;
+  margin: auto;
+  margin-top: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
   justify-content: space-between;
+  text-align: left;
+}
+
+
+.booked-item {
+  border: none;
+  background-color: none;
+  min-width: 20rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-
-}
-
-.booked-sessions strong {
-  flex: 1;
-  margin-right: 10px;
-}
-
-.booked-sessions-item {
-  margin-bottom: 10px;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .cancel-booking-button {
-  background-color: #813126;
+  background-image: linear-gradient(to right, #63434c 0%, #2a1621 51%, #120b0f 100%);
+  padding: 10px 25px;
+  margin-right: 0;
+  text-align: center;
+  font-weight: 300;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border: 1px solid rgb(255, 249, 239);
+  border-radius: 10px;
+  display: block;
+}
+
+.cancel-booking-button:hover {
+  background-position: right center;
+  /* change the direction of the change here */
   color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
+  text-decoration: none;
 }
 
 .available-session {
   background-color: #cea86f;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
   color: white;
-  
+
 }
 
 .booked-session {
   background-color: #813126;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
   color: white;
 }
 
 .header-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 350px;
-  margin: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  display: block;
+  width: 100%;
+  height: 100vh;
   text-align: center;
   font-size: 40px;
   font-weight: bolder;
-  opacity: 0.8;
   background-image: url(https://jamiesfarm.org.uk/wp-content/uploads/2023/09/Jamies-Farm_Hereford_July-2021_Lydia-Booth-Photography_high-res-2-1536x1024.jpg);
   background-size: cover;
-  
-  
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vh;
 }
 
 .header-content {
@@ -133,46 +164,59 @@ code {
   margin-bottom: 20px;
 }
 
-.farm-name {
-  font-size: 50px;
-  font-weight: bold;
-  margin: 20px 0;
-  color: #DCD7C9;
+
+h2 {
+  color: #ffffff;
+  text-shadow: 0 0 20px #000000;
+  font-size: 40pt;
+  margin-top: -6rem;
 }
 
 .button-container {
   display: flex;
-  gap: 20px;}
-  
+  gap: 20px;
+}
+
 
 .header-button {
-  background-color: #813126;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
+  background-image: linear-gradient(to right, #63434c 0%, #2a1621 51%, #120b0f 100%);
+  margin: 5px;
+  padding: 15px 35px;
+  text-align: center;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #000000;
+  border: 1px solid rgb(255, 249, 239);
+  border-radius: 10px;
+  display: block;
 }
 
 .header-button:hover {
-  background-color: #cea86f;
-  color: black;
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
 }
 
 .loading-page {
   font-size: 16px;
-  
+
 }
-  
+
 
 .footer {
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
+  width: 100%;
   border-radius: 5px;
-  background-color: #DCD7C9;
+  background-color: #5a504b;
   opacity: 0.8;
+  height: 4rem;
+  color: #fff;
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }
 
 

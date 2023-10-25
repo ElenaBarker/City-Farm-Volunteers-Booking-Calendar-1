@@ -1,5 +1,6 @@
 const VolunteerInstructionsComponent = ({ pageToShow }) => {
   return (
+    // <div className="instr-container">
     <div className="volunteer-instructions">
       {pageToShow === "manager" && <h1>You are the manager</h1>}
       <h3 className="instructions-header">How to Book a Volunteer Session</h3>
@@ -47,6 +48,7 @@ const VolunteerInstructionsComponent = ({ pageToShow }) => {
         only allow one volunteer per session (either morning or evening).
       </p>
     </div>
+    // </div>
   );
 };
 

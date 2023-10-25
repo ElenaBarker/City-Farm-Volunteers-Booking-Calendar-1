@@ -1,17 +1,23 @@
+import { Divider } from "@mui/material";
 import React from "react";
 
 const BookedSessionsComponent = ({ bookedSessions }) => {
+  const handleCancelBooking = () => {
+
+  }
   return (
     <div className="booked-sessions">
-      <ul>
-        {bookedSessions.map((session, index) => (
-          <li key={index} className="booked-sessions-item">
-            <strong>{session.title}</strong> -{" "}
-            {new Date(session.startdate).toDateString()} - {session.name}{" "}
-            <button className="cancel-booking-button">Cancel booking</button>
-          </li>
-        ))}
-      </ul>
+      {bookedSessions.map((session, index) => (
+        <div key={index} className="booked-item">
+          <p>{session.title}</p>
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <p>{new Date(session.startdate).toDateString()}</p>
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <p>{session.name}</p>
+          <button className="cancel-booking-button" onClick={handleCancelBooking}>Cancel booking</button>
+        </div>
+
+      ))}
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import React from "react";
 
 const BookedSessionsComponent = ({ bookedSessions }) => {
-  console.log(bookedSessions);
   return (
     <div className="booked-sessions">
       <ul>

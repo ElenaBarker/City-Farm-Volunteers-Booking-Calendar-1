@@ -8,11 +8,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Select } from "@mui/material";
 import { MenuItem } from "@mui/material";
 
-export default function FormDialog({ session, volunteers }) {
+export default function FormDialog({ session, volunteers, onBook }) {
   const [open, setOpen] = useState(session);
   const [selectedVolunteer, setSelectedVolunteer] = useState(null);
 
-  const handleAddBooking = async (selectedSession) => {
+  const handleAddBooking = async () => {
     try {
       const response = await fetch(
         "https://pathway-city-farm-project-backend.onrender.com/bookings",
@@ -27,8 +27,12 @@ export default function FormDialog({ session, volunteers }) {
           }),
         }
       );
-      if (!response.ok) {
-        throw Error(`Failed to add video. Error: ${response.status}`);
+      if (response.ok) {
+        onBook();
+      } else if (response.status === 409) {
+        alert("This session is already booked.");
+      } else {
+        throw Error(`Failed to book session. Error: ${response.status}`);
       }
     } catch (error) {}
     setOpen(false);

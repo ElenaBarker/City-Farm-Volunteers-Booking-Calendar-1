@@ -56,7 +56,7 @@ export default function FormDialog({
         <DialogTitle>Book the session</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To book the session, please provide your name.
+            To book the session, please select your name.
           </DialogContentText>
           <Select onChange={handleChange}>
             {volunteers.map((volunteer, index) => (

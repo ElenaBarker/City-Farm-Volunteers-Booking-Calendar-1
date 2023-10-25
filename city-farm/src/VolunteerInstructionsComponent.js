@@ -1,6 +1,5 @@
 const VolunteerInstructionsComponent = ({ pageToShow }) => {
   return (
-    // <div className="instr-container">
     <div className="volunteer-instructions">
       {pageToShow === "manager" && <h1>You are the manager</h1>}
       <h3 className="instructions-header">How to Book a Volunteer Session</h3>
@@ -23,7 +22,7 @@ const VolunteerInstructionsComponent = ({ pageToShow }) => {
             <span className="available-session">morning</span> session on the
             calendar.
           </li>
-          <li>Enter your name and click the "Book this session" button.</li>
+          <li>Select your name and click the "Book" button.</li>
           <li>
             You'll receive a confirmation, and the session will be marked as
             booked by changing color to{" "}
@@ -48,7 +47,6 @@ const VolunteerInstructionsComponent = ({ pageToShow }) => {
         only allow one volunteer per session (either morning or evening).
       </p>
     </div>
-    // </div>
   );
 };
 

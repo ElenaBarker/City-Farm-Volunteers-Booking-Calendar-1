@@ -126,14 +126,14 @@ const CalendarComponent = () => {
           if (event.status === "booked") {
             return {
               style: {
-                backgroundColor: "#813126",
+                backgroundColor: "#2a1621",
                 color: "white",
               },
             };
           } else if (event.status === "available") {
             return {
               style: {
-                backgroundColor: "#cea86f",
+                backgroundColor: "#79AC78",
                 color: "white",
               },
             };

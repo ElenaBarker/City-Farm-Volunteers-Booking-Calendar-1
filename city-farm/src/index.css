@@ -124,7 +124,7 @@ code {
 }
 
 .available-session {
-  background-color: #cea86f;
+  background-color: #79AC78;
   padding: 0.1rem 0.3rem;
   border-radius: 3px;
   color: white;
@@ -132,7 +132,7 @@ code {
 }
 
 .booked-session {
-  background-color: #813126;
+  background-color: #2a1621;
   padding: 0.1rem 0.3rem;
   border-radius: 3px;
   color: white;

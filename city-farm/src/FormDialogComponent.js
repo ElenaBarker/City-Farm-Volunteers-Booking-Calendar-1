@@ -18,29 +18,36 @@ export default function FormDialog({
   const [selectedVolunteer, setSelectedVolunteer] = useState(null);
 
   const handleAddBooking = async () => {
-    try {
-      const response = await fetch(
-        "https://pathway-city-farm-project-backend.onrender.com/bookings",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            session_id: session.id,
-            volunteer_id: selectedVolunteer,
-          }),
+    const currentDate = new Date();
+    const sessionStartDate = new Date(session.startdate);
+
+    if (sessionStartDate <= currentDate) {
+      alert("You cannot book a session for a past date.");
+    } else {
+      try {
+        const response = await fetch(
+          "https://pathway-city-farm-project-backend.onrender.com/bookings",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              session_id: session.id,
+              volunteer_id: selectedVolunteer,
+            }),
+          }
+        );
+        if (response.ok) {
+          onBook();
+        } else if (response.status === 409) {
+          alert("This session is already booked.");
+        } else {
+          throw Error(`Failed to book session. Error: ${response.status}`);
         }
-      );
-      if (response.ok) {
-        onBook();
-      } else if (response.status === 409) {
-        alert("This session is already booked.");
-      } else {
-        throw Error(`Failed to book session. Error: ${response.status}`);
-      }
-    } catch (error) {}
-    setDialogOpen(false);
+      } catch (error) {}
+      setDialogOpen(false);
+    }
   };
 
   const handleClose = () => {

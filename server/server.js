@@ -74,8 +74,17 @@ app.post("/bookings", async (req, res) => {
     const availabilityResult = await db.query(queryToCheckAvailability, [
       session_id,
     ]);
-    if (availabilityResult.rows[0].status === "booked") {
+    const sessionStatus = availabilityResult.rows[0].status;
+    if (sessionStatus === "booked") {
       res.status(409).json({ error: "This session is already booked." });
+      return;
+    }
+    const sessionStartDate = new Date(availabilityResult.rows[0].startdate);
+    const currentDate = new Date();
+    if (sessionStartDate <= currentDate) {
+      res
+        .status(400)
+        .json({ error: "You cannot book a session for a past date." });
       return;
     }
     const query = `
@@ -113,6 +122,16 @@ app.delete("/bookings/:bookingId", async (req, res) => {
 
     const session_id = sessionInfoResult.rows[0].session_id;
 
+    const sessionStartDate = new Date(sessionInfoResult.rows[0].startdate);
+
+    const currentDate = new Date();
+    if (sessionStartDate <= currentDate) {
+      res
+        .status(400)
+        .json({ error: "You cannot cancel a booking for a past session." });
+      return;
+    }
+
     const deleteBookingQuery = `
       DELETE FROM Bookings
       WHERE booking_id = $1;
@@ -131,7 +150,6 @@ app.delete("/bookings/:bookingId", async (req, res) => {
     res.status(400).json({ error: "Cancellation failed" });
   }
 });
-
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}. Ready to accept requests!`);

@@ -15,15 +15,11 @@ export default function FormDialog({
   setDialogOpen,
   dialogOpen,
 }) {
-  const [selectedVolunteer, setSelectedVolunteer] = useState(null);
+  const [selectedVolunteer, setSelectedVolunteer] = useState(
+    "Please select your name..."
+  );
 
   const handleAddBooking = async () => {
-    const currentDate = new Date();
-    const sessionStartDate = new Date(session.startdate);
-
-    if (sessionStartDate <= currentDate) {
-      alert("You cannot book a session for a past date.");
-    } else {
       try {
         const response = await fetch(
           "https://pathway-city-farm-project-backend.onrender.com/bookings",
@@ -46,8 +42,9 @@ export default function FormDialog({
           throw Error(`Failed to book session. Error: ${response.status}`);
         }
       } catch (error) {}
+      setSelectedVolunteer("Please select your name...");
       setDialogOpen(false);
-    }
+    
   };
 
   const handleClose = () => {
@@ -65,7 +62,10 @@ export default function FormDialog({
           <DialogContentText>
             To book the session, please select your name.
           </DialogContentText>
-          <Select onChange={handleChange}>
+          <Select onChange={handleChange} value={selectedVolunteer}>
+            <MenuItem value="Please select your name..." disabled>
+              Please select your name...
+            </MenuItem>
             {volunteers.map((volunteer, index) => (
               <MenuItem key={index} value={volunteer.id}>
                 {volunteer.name}

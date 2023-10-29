@@ -22,7 +22,10 @@ app.get("/", function (req, res) {
 
 app.get("/sessions", async (req, res) => {
   try {
-    const query = `SELECT * FROM Sessions`;
+    const query = `SELECT *
+     FROM Sessions
+     WHERE startdate >= current_date;
+`;
     const result = await db.query(query);
     const sessions = result.rows;
     res.status(200).json(sessions);
@@ -79,14 +82,7 @@ app.post("/bookings", async (req, res) => {
       res.status(409).json({ error: "This session is already booked." });
       return;
     }
-    const sessionStartDate = new Date(availabilityResult.rows[0].startdate);
-    const currentDate = new Date();
-    if (sessionStartDate <= currentDate) {
-      res
-        .status(400)
-        .json({ error: "You cannot book a session for a past date." });
-      return;
-    }
+
     const query = `
       INSERT INTO Bookings (session_id, volunteer_id)
       VALUES ($1, $2)
@@ -121,16 +117,6 @@ app.delete("/bookings/:bookingId", async (req, res) => {
     ]);
 
     const session_id = sessionInfoResult.rows[0].session_id;
-
-    const sessionStartDate = new Date(sessionInfoResult.rows[0].startdate);
-
-    const currentDate = new Date();
-    if (sessionStartDate <= currentDate) {
-      res
-        .status(400)
-        .json({ error: "You cannot cancel a booking for a past session." });
-      return;
-    }
 
     const deleteBookingQuery = `
       DELETE FROM Bookings

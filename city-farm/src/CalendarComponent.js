@@ -96,26 +96,20 @@ const CalendarComponent = () => {
   }
 
   const onCancelBooking = async (bookingId) => {
-    console.log(selectedSession);
-    const today = new Date();
-    if (selectedSession.start < today) {
-      alert("You cannot cancel a booking for a past session.");
-    } else {
-      try {
-        const response = await fetch(
-          `https://pathway-city-farm-project-backend.onrender.com/bookings/${bookingId}`,
-          {
-            method: "DELETE",
-          }
-        );
-        if (!response.ok) {
-          throw Error(`Failed to cancel booking. Error: ${response.status}`);
+    try {
+      const response = await fetch(
+        `https://pathway-city-farm-project-backend.onrender.com/bookings/${bookingId}`,
+        {
+          method: "DELETE",
         }
-        fetchAllBookings();
-        fetchAllSessions();
-      } catch (error) {
-        console.error("Error canceling booking", error);
+      );
+      if (!response.ok) {
+        throw Error(`Failed to cancel booking. Error: ${response.status}`);
       }
+      fetchAllBookings();
+      fetchAllSessions();
+    } catch (error) {
+      console.error("Error canceling booking", error);
     }
   };
 
@@ -126,7 +120,7 @@ const CalendarComponent = () => {
         localizer={localizer}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 400 }}
+        style={{ height: 450 }}
         events={sessions}
         eventPropGetter={(event) => {
           if (event.status === "booked") {

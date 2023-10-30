@@ -7,7 +7,7 @@ import BookedSessionsComponent from "./BookedSessionsComponent";
 
 const localizer = momentLocalizer(moment);
 
-const CalendarComponent = () => {
+const CalendarComponent = ({ pageToShow }) => {
   const [selectedSession, setSelectedSession] = useState(null);
   const [bookedSessions, setBookedSessions] = useState([]);
   const [sessions, setSessions] = useState(null);
@@ -38,7 +38,7 @@ const CalendarComponent = () => {
       }));
       setSessions(eventsForCalendarComponent);
     } catch (error) {
-      console.error("Error fetching slots", error);
+      console.error("Error fetching sessions", error);
     }
   };
 
@@ -115,35 +115,39 @@ const CalendarComponent = () => {
 
   return (
     <div className="calendar-container">
-      <h3 className="calendar-header">Volunteer Booking Calendar</h3>
-      <BigCalendar
-        localizer={localizer}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 450 }}
-        events={sessions}
-        eventPropGetter={(event) => {
-          if (event.status === "booked") {
-            return {
-              style: {
-                backgroundColor: "#2a1621",
-                color: "white",
-              },
-            };
-          } else if (event.status === "available") {
-            return {
-              style: {
-                backgroundColor: "#79AC78",
-                color: "white",
-              },
-            };
-          }
-          return {};
-        }}
-        onSelectEvent={handleEventSelect}
-      />
+      {pageToShow === "volunteer" && (
+        <h3 className="calendar-header">Volunteer Booking Calendar</h3>
+      )}
+      {pageToShow === "volunteer" && (
+        <BigCalendar
+          localizer={localizer}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 450 }}
+          events={sessions}
+          eventPropGetter={(event) => {
+            if (event.status === "booked") {
+              return {
+                style: {
+                  backgroundColor: "#2a1621",
+                  color: "white",
+                },
+              };
+            } else if (event.status === "available") {
+              return {
+                style: {
+                  backgroundColor: "#79AC78",
+                  color: "white",
+                },
+              };
+            }
+            return {};
+          }}
+          onSelectEvent={handleEventSelect}
+        />
+      )}
 
-      {selectedSession && (
+      {pageToShow === "volunteer" && selectedSession && (
         <FormDialog
           session={selectedSession}
           onBook={() => handleSessionBooked()}
@@ -152,14 +156,15 @@ const CalendarComponent = () => {
           dialogOpen={dialogOpen}
         />
       )}
-
-      <div className="booked-sessions">
-        <h3>Booked Sessions:</h3>
-        <BookedSessionsComponent
-          bookedSessions={bookedSessions}
-          onCancelBooking={onCancelBooking}
-        />
-      </div>
+      {pageToShow === "manager" && (
+        <div className="booked-sessions">
+          <h3>Booked Sessions:</h3>
+          <BookedSessionsComponent
+            bookedSessions={bookedSessions}
+            onCancelBooking={onCancelBooking}
+          />
+        </div>
+      )}
     </div>
   );
 };

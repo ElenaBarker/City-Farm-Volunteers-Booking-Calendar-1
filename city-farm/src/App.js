@@ -6,13 +6,14 @@ import HeaderComponent from "./HeaderComponent";
 import VolunteerInstructionsComponent from "./VolunteerInstructionsComponent";
 
 
+
 function App() {
   const [pageToShow, setPageToShow] = useState("volunteer");
   return (
     <div className="App">
       <HeaderComponent setPageToShow={setPageToShow} />
-      <VolunteerInstructionsComponent pageToShow={pageToShow} />
-      {pageToShow === "volunteer" ? <CalendarComponent /> : <p>Hello manager</p>}
+      {pageToShow === "volunteer" && <VolunteerInstructionsComponent />}
+      <CalendarComponent pageToShow={pageToShow} />
       <FooterComponent />
     </div>
   );

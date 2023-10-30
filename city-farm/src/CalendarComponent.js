@@ -4,6 +4,7 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import FormDialog from "./FormDialogComponent";
 import BookedSessionsComponent from "./BookedSessionsComponent";
+import AvailableSessionsComponent from "./AvailableSessionsComponent";
 
 const localizer = momentLocalizer(moment);
 
@@ -156,13 +157,18 @@ const CalendarComponent = ({ pageToShow }) => {
           dialogOpen={dialogOpen}
         />
       )}
-      {pageToShow === "manager" && (
+      {pageToShow === "volunteer" && (
         <div className="booked-sessions">
           <h3>Booked Sessions:</h3>
           <BookedSessionsComponent
             bookedSessions={bookedSessions}
             onCancelBooking={onCancelBooking}
           />
+        </div>
+      )}
+      {pageToShow === "manager" && (
+        <div className="available-sessions">
+          <AvailableSessionsComponent availableSessions={sessions} />
         </div>
       )}
     </div>

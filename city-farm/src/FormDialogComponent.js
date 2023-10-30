@@ -40,6 +40,7 @@ export default function FormDialog({
       );
       if (response.ok) {
         onBook();
+        alert("You successfully booked the session.");
       } else if (response.status === 409) {
         alert("This session is already booked.");
       } else {

@@ -20,31 +20,36 @@ export default function FormDialog({
   );
 
   const handleAddBooking = async () => {
-      try {
-        const response = await fetch(
-          "https://pathway-city-farm-project-backend.onrender.com/bookings",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              session_id: session.id,
-              volunteer_id: selectedVolunteer,
-            }),
-          }
-        );
-        if (response.ok) {
-          onBook();
-        } else if (response.status === 409) {
-          alert("This session is already booked.");
-        } else {
-          throw Error(`Failed to book session. Error: ${response.status}`);
+    if (selectedVolunteer === "Please select your name...") {
+      alert("Please select your name.");
+      return;
+    }
+    try {
+      const response = await fetch(
+        "https://pathway-city-farm-project-backend.onrender.com/bookings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            session_id: session.id,
+            volunteer_id: selectedVolunteer,
+          }),
         }
-      } catch (error) {}
-      setSelectedVolunteer("Please select your name...");
-      setDialogOpen(false);
-    
+      );
+      if (response.ok) {
+        onBook();
+      } else if (response.status === 409) {
+        alert("This session is already booked.");
+      } else {
+        throw Error(`Failed to book session. Error: ${response.status}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    setSelectedVolunteer("Please select your name...");
+    setDialogOpen(false);
   };
 
   const handleClose = () => {
@@ -74,8 +79,12 @@ export default function FormDialog({
           </Select>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleAddBooking}>Book</Button>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button className="form-button" onClick={handleAddBooking}>
+            Book
+          </Button>
+          <Button className="form-button" onClick={handleClose}>
+            Cancel
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

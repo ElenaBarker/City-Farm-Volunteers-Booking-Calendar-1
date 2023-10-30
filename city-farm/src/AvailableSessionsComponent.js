@@ -30,7 +30,9 @@ const AvailableSessionsComponent = ({ availableSessions }) => {
                   <TableCell>
                     {new Date(session.start).toDateString()}
                   </TableCell>
-                  <TableCell>{session.status}</TableCell>
+                  <TableCell className="available-session">
+                    {session.status}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

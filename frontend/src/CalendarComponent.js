@@ -85,9 +85,9 @@ const CalendarComponent = ({ pageToShow }) => {
   if (sessions === null) {
     return (
       <p className="loading-page">
-        I apologise for any inconvenience caused by the slower server
-        performance. I'm currently using a free Render service, which can
-        sometimes lead to reduced speed..
+        Loading data... My backend is currently hosted on the free tier of
+        Render, which may cause the first load of data to be slow. In
+        production, this would not be an issue.
       </p>
     );
   }

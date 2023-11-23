@@ -23,9 +23,7 @@ const CalendarComponent = ({ pageToShow }) => {
 
   const fetchAllSessions = async () => {
     try {
-      const response = await fetch(
-        "https://elena-farm.raccoon.space/sessions"
-      );
+      const response = await fetch("https://elena-farm.raccoon.space/sessions");
       if (!response.ok) {
         throw Error(`Failed to fetch. Error: ${response.status}`);
       }
@@ -45,9 +43,7 @@ const CalendarComponent = ({ pageToShow }) => {
 
   const fetchAllBookings = async () => {
     try {
-      const response = await fetch(
-        "https://elena-farm.raccoon.space/bookings"
-      );
+      const response = await fetch("https://elena-farm.raccoon.space/bookings");
       if (!response.ok) {
         throw Error(`Failed to fetch. Error: ${response.status}`);
       }
@@ -99,7 +95,7 @@ const CalendarComponent = ({ pageToShow }) => {
   const onCancelBooking = async (bookingId) => {
     try {
       const response = await fetch(
-        `https://elena-farm.raccoon.space/${bookingId}`,
+        `https://elena-farm.raccoon.space/bookings/${bookingId}`,
         {
           method: "DELETE",
         }

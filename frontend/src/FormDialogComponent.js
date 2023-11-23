@@ -26,7 +26,7 @@ export default function FormDialog({
     }
     try {
       const response = await fetch(
-        "https://pathway-city-farm-project-backend.onrender.com/bookings",
+        "https://elena-farm.raccoon.space/bookings",
         {
           method: "POST",
           headers: {

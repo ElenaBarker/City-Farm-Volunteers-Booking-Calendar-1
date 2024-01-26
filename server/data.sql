@@ -8,8 +8,8 @@ CREATE TABLE Sessions (
 
 INSERT INTO Sessions (title, startdate, enddate, status)
 VALUES
-  ('Morning session', '2023-11-01 09:00:00', '2023-11-01 11:00:00', 'available'),
-  ('Evening session', '2023-11-01 17:00:00', '2023-11-01 19:00:00', 'available'),
+  ('Morning session', '2024-02-01 09:00:00', '2024-02-01 11:00:00', 'available'),
+  ('Evening session', '2024-02-01 17:00:00', '2024-02-01 19:00:00', 'available'),
   ('Morning session', '2023-11-02 09:00:00', '2023-11-02 11:00:00', 'available'),
   ('Evening session', '2023-11-02 17:00:00', '2023-11-02 19:00:00', 'available'),
   ('Morning session', '2023-11-03 09:00:00', '2023-11-03 11:00:00', 'available'),

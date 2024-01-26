@@ -26,7 +26,7 @@ export default function FormDialog({
     }
     try {
       const response = await fetch(
-        "https://elena-farm.raccoon.space/bookings",
+        "http://ec2-13-40-71-83.eu-west-2.compute.amazonaws.com:5000/bookings",
         {
           method: "POST",
           headers: {

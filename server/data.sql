@@ -8,14 +8,14 @@ CREATE TABLE Sessions (
 
 INSERT INTO Sessions (title, startdate, enddate, status)
 VALUES
-  ('Morning session', '2024-02-01 09:00:00', '2024-02-01 11:00:00', 'available'),
-  ('Evening session', '2024-02-01 17:00:00', '2024-02-01 19:00:00', 'available'),
-  ('Morning session', '2023-11-02 09:00:00', '2023-11-02 11:00:00', 'available'),
-  ('Evening session', '2023-11-02 17:00:00', '2023-11-02 19:00:00', 'available'),
-  ('Morning session', '2023-11-03 09:00:00', '2023-11-03 11:00:00', 'available'),
-  ('Evening session', '2023-11-03 17:00:00', '2023-11-03 19:00:00', 'available'),
-  ('Morning session', '2023-11-04 09:00:00', '2023-11-04 11:00:00', 'available'),
-  ('Evening session', '2023-11-04 17:00:00', '2023-11-04 19:00:00', 'available'),
+  ('Morning session', '2024-02-05 09:00:00', '2024-02-05 11:00:00', 'available'),
+  ('Evening session', '2024-02-05 17:00:00', '2024-02-05 19:00:00', 'available'),
+  ('Morning session', '2024-02-02 09:00:00', '2024-02-02 11:00:00', 'available'),
+  ('Evening session', '2024-02-02 17:00:00', '2024-02-02 19:00:00', 'available'),
+  ('Morning session', '2024-02-03 09:00:00', '2024-02-03 11:00:00', 'available'),
+  ('Evening session', '2024-02-03 17:00:00', '2024-02-03 19:00:00', 'available'),
+  ('Morning session', '2024-02-04 09:00:00', '2024-02-04 11:00:00', 'available'),
+  ('Evening session', '2024-02-04 17:00:00', '2024-02-04 19:00:00', 'available'),
   ('Morning session', '2023-11-05 09:00:00', '2023-11-05 11:00:00', 'available'),
   ('Evening session', '2023-11-05 17:00:00', '2023-11-05 19:00:00', 'available'),
   ('Morning session', '2023-11-06 09:00:00', '2023-11-06 11:00:00', 'available'),

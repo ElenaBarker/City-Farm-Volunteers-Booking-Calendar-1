@@ -114,6 +114,7 @@ const CalendarComponent = ({ pageToShow }) => {
     }
   };
 
+  
   return (
     <div className="calendar-container">
       {pageToShow === "volunteer" && (
@@ -144,7 +145,7 @@ const CalendarComponent = ({ pageToShow }) => {
             }
             return {};
           }}
-          onSelectEvent={handleEventSelect}
+          onSelectEvent={handleEventSelect} 
         />
       )}
 

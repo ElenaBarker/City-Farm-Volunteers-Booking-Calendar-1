@@ -43,4 +43,5 @@ const AvailableSessionsComponent = ({ availableSessions }) => {
   );
 };
 
+
 export default AvailableSessionsComponent;

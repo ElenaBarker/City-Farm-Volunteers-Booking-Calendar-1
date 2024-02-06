@@ -31,8 +31,8 @@ jobs:
     #   - name: Set SSH Key Permissions
     #     run: chmod 600 ~/.ssh/${{ secrets.EC2_SSH_PRIVATE_KEY }}
 
-      - name: Test SSH Connection
-        run: ssh -o StrictHostKeyChecking=no -i ${{secrets.EC2_SSH_PRIVATE_KEY}} ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'echo Connection successful'
+    #   - name: Test SSH Connection
+    #     run: ssh -o StrictHostKeyChecking=no -i ${{secrets.EC2_SSH_PRIVATE_KEY}} ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'echo Connection successful'
 
       - name: Deploy to EC2
         uses: burnett01/rsync-deployments@6.0.0

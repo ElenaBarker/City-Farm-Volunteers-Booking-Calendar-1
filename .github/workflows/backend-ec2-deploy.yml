@@ -13,14 +13,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set working directory and Install dependencies
-        run: |
-          ls -l   
-          npm install
-        working-directory: ${{ github.workspace }}/server
-
-      - name: Show Files in Working Directory
-        run: ls -l
-        working-directory: ./server
+        run:  npm install
+        working-directory: ./app
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -30,12 +24,12 @@ jobs:
           aws-region: eu-west-2
 
       - name: Set SSH Key Permissions
-        run: chmod 600 ${{ github.workspace }}/Downloads/FarmAppLoginKey.pem
+        run: chmod 600 ${{ secrets.EC2_SSH_PRIVATE_KEY }}
 
       - name: Test SSH Connection
-        run: ssh -o StrictHostKeyChecking=no -i ${{ github.workspace }}/Downloads/FarmAppLoginKey.pem${{ secrets.EC2_SSH_PRIVATE_KEY }} ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'echo Connection successful'
+        run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_PRIVATE_KEY }} .${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'echo Connection successful'
 
       - name: Deploy to EC2
         run: |
-          ssh -i ${{ github.workspace }}/Downloads/FarmAppLoginKey.pem${{ secrets.EC2_SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'cd ./backend && git pull && systemctl restart node server.js'
+          ssh -i ${{ secrets.EC2_SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no .${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'cd ./app && git pull && systemctl restart node server.js'
           continue-on-error: true

@@ -18,6 +18,10 @@ jobs:
           npm install
         working-directory: ./server
 
+      - name: Show Files in Working Directory
+        run: ls -l
+        working-directory: ./server
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:

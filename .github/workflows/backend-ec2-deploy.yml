@@ -30,9 +30,9 @@ jobs:
           aws-region: eu-west-2
 
       - name: Test SSH Connection
-        run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_PRIVATE_KEY }} ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'echo Connection successful'
+        run: ssh -o StrictHostKeyChecking=no -i ${{ github.workspace }}/Downloads/${{ secrets.EC2_SSH_PRIVATE_KEY }} ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'echo Connection successful'
 
       - name: Deploy to EC2
         run: |
-          ssh -i ${{ secrets.EC2_SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'cd ./backend && git pull && systemctl restart node server.js'
+          ssh -i ${{ github.workspace }}/Downloads/${{ secrets.EC2_SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'cd ./backend && git pull && systemctl restart node server.js'
           continue-on-error: true

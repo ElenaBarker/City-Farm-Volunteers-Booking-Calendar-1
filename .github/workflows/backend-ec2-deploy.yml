@@ -14,9 +14,9 @@ jobs:
 
       - name: Set working directory and Install dependencies
         run: |
-          cd /server
+          cd server
           npm install
-        working-directory: /server
+        working-directory: server
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1

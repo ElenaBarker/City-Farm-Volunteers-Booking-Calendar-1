@@ -12,9 +12,13 @@ jobs:
       - name: Get Latest Code
         uses: actions/checkout@v2
 
+      - name: Show Current Working Directory
+        run: pwd
+
+
       - name: Install dependencies
         run:  npm install
-    
+        working-directory: ./server
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1

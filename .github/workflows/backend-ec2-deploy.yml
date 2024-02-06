@@ -15,9 +15,8 @@ jobs:
       - name: Show Current Working Directory
         run: pwd
 
-
       - name: Install dependencies
-        run:  npm install
+        run: npm install
         working-directory: ./server
 
       - name: Configure AWS Credentials
@@ -28,7 +27,7 @@ jobs:
           aws-region: eu-west-2
 
       - name: Set SSH Key Permissions
-        run: chmod 400 ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+        run: chmod 400 ~/.ssh/${{ secrets.EC2_SSH_PRIVATE_KEY }}
 
       - name: Test SSH Connection
         run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_PRIVATE_KEY }} ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'echo Connection successful'

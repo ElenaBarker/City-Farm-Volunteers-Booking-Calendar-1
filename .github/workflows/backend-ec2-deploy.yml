@@ -1,0 +1,30 @@
+name: Backend EC2 Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Latest Code
+        uses: actions/checkout@v2
+
+      - name: Set working directory and Install dependencies
+        run: |
+          cd /server
+          npm install
+        working-directory: /server
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-2
+
+      - name: Deploy to EC2
+        run: |
+          ssh -i ${{ secrets.EC2_SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'cd ./backend && git pull && systemctl restart node server.js'

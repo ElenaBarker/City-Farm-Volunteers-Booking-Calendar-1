@@ -12,12 +12,14 @@ jobs:
       - name: Get Latest Code
         uses: actions/checkout@v2
 
-      - name: Show Current Working Directory
-        run: pwd
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 12
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./server
+        # working-directory: ./server
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -26,13 +28,22 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-2
 
-    #   - name: Set SSH Key Permissions
-    #     run: chmod 400 ~/.ssh/${{ secrets.EC2_SSH_PRIVATE_KEY }}
+      - name: Set SSH Key Permissions
+        run: chmod 400 ~/.ssh/${{ secrets.EC2_SSH_PRIVATE_KEY }}
 
-    #   - name: Test SSH Connection
-    #     run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_PRIVATE_KEY }} ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'echo Connection successful'
+      - name: Test SSH Connection
+        run: ssh -o StrictHostKeyChecking=no -i ${{secrets.EC2_SSH_PRIVATE_KEY}} ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'echo Connection successful'
 
       - name: Deploy to EC2
-        run: |
-          ssh -i ${{ secrets.EC2_SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'cd /app && git pull && systemctl restart node server.js'
-          continue-on-error: true
+        uses: burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -avzr --exclude=node_modules --delete
+          path: ./server/
+          remote_path: ~/.app/
+          remote_host: ${{secrets.EC2_HOST}}
+          remote_port: 22
+          remote_user: ${{secrets.EC2_USERNAME}}
+          remote_key: ${{secrets.EC2_SSH_PRIVATE_KEY}}
+
+
+       

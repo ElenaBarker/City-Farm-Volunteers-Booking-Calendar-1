@@ -14,9 +14,9 @@ jobs:
 
       - name: Set working directory and Install dependencies
         run: |
-          cd server
+          ls -l   
           npm install
-        working-directory: ./server
+        working-directory: ${{ github.workspace }}/server
 
       - name: Show Files in Working Directory
         run: ls -l

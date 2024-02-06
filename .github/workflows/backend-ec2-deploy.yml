@@ -39,7 +39,7 @@ jobs:
         with:
           switches: -avzr --exclude=node_modules --delete
           path: ./server/
-          remote_path: ~/.app/
+          remote_path: ./app
           remote_host: ${{secrets.EC2_HOST}}
           remote_port: 22
           remote_user: ${{secrets.EC2_USERNAME}}

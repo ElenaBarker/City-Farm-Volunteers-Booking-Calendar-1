@@ -14,6 +14,7 @@ jobs:
 
       - name: Set working directory and Install dependencies
         run: |
+          cd server
           npm install
         working-directory: ./server
 
@@ -26,7 +27,6 @@ jobs:
 
       - name: Test SSH Connection
         run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_PRIVATE_KEY }} ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'echo Connection successful'
-
 
       - name: Deploy to EC2
         run: |

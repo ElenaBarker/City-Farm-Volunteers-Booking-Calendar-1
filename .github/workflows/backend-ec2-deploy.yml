@@ -29,6 +29,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-2
 
+      - name: Set SSH Key Permissions
+        run: chmod 600 ${{ github.workspace }}/Downloads/FarmAppLoginKey.pem
+
       - name: Test SSH Connection
         run: ssh -o StrictHostKeyChecking=no -i ${{ github.workspace }}/Downloads/FarmAppLoginKey.pem${{ secrets.EC2_SSH_PRIVATE_KEY }} ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'echo Connection successful'
 

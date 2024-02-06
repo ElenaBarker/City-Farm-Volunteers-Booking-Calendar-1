@@ -26,8 +26,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-2
 
-      - name: Set SSH Key Permissions
-        run: chmod 400 ~/.ssh/${{ secrets.EC2_SSH_PRIVATE_KEY }}
+    #   - name: Set SSH Key Permissions
+    #     run: chmod 400 ~/.ssh/${{ secrets.EC2_SSH_PRIVATE_KEY }}
 
       - name: Test SSH Connection
         run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_PRIVATE_KEY }} ${{secrets.EC2_USERNAME}}@${{secrets.EC2_HOST}} 'echo Connection successful'

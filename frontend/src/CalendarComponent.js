@@ -23,7 +23,9 @@ const CalendarComponent = ({ pageToShow }) => {
 
   const fetchAllSessions = async () => {
     try {
-      const response = await fetch("https://elena-farm.raccoon.space/sessions");
+      const response = await fetch(
+        "https://pathway-city-farm-project-backend.onrender.com/sessions"
+      );
       if (!response.ok) {
         throw Error(`Failed to fetch. Error: ${response.status}`);
       }
@@ -43,7 +45,9 @@ const CalendarComponent = ({ pageToShow }) => {
 
   const fetchAllBookings = async () => {
     try {
-      const response = await fetch("https://elena-farm.raccoon.space/bookings");
+      const response = await fetch(
+        "https://pathway-city-farm-project-backend.onrender.com/bookings"
+      );
       if (!response.ok) {
         throw Error(`Failed to fetch. Error: ${response.status}`);
       }
@@ -57,7 +61,7 @@ const CalendarComponent = ({ pageToShow }) => {
   const fetchAllVolunteers = async () => {
     try {
       const response = await fetch(
-        "https://elena-farm.raccoon.space/volunteers"
+        "https://pathway-city-farm-project-backend.onrender.com/volunteers"
       );
       if (!response.ok) {
         throw Error(`Failed to fetch volunteers. Error: ${response.status}`);
@@ -95,7 +99,7 @@ const CalendarComponent = ({ pageToShow }) => {
   const onCancelBooking = async (bookingId) => {
     try {
       const response = await fetch(
-        `https://elena-farm.raccoon.space/bookings/${bookingId}`,
+        `https://pathway-city-farm-project-backend.onrender.com/bookings/${bookingId}`,
         {
           method: "DELETE",
         }
